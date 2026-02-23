@@ -21,9 +21,32 @@ git config user.signingkey ~/.ssh/id_ed25519_devops.pub
 git config commit.gpgSign true
 ```
 
-After that I can create a signed commit:
+After that I can create a signed commit
 
-```sh
-git commit -S -m "Signed commit for lab1"
-```
+## Task 2 – Merge strategies in Git
+
+### Standard merge
+- creates a separate merge commit;
+- keeps the full branch history as it was;
+- makes it easy to see who did what and when.
+
+Cons: history can become noisy with many branches and merge commits.
+
+### Squash and merge
+- combines all commits from the feature branch into a single commit;
+- `main` receives one clean commit with the final result;
+- useful when the feature branch has many small or messy commits.
+
+Cons: you lose detailed history inside the branch, it is harder to find exactly which change introduced a bug.
+
+### Rebase and merge
+- replays the branch commits on top of the base branch;
+- produces a straight, linear history without merge commits.
+
+Cons: it rewrites history, which is dangerous for shared branches; teammates can get confused if they already pulled the old history.
+
+### Why standard merge is often preferred
+- it does not rewrite history, only adds to it;
+- easier to understand what actually happened with branches;
+- lower risk of breaking other people’s work in collaborative projects.
 
