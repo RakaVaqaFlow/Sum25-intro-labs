@@ -50,3 +50,4 @@ Cons: it rewrites history, which is dangerous for shared branches; teammates can
 - easier to understand what actually happened with branches;
 - lower risk of breaking other people’s work in collaborative projects.
 
+
