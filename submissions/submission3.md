@@ -29,3 +29,52 @@ git push
 **RESULT:**
 
 ![screenshot](img/lab3-1.png)
+
+
+**Summary of what I saw:**
+
+- The workflow was triggered by a `push` to my active branch.
+- `actions/checkout@v4` successfully cloned the repository into the runner.
+- The final step ran `git --version` and `ls -R`, and I saw:
+  - Git version printed in the logs,
+  - A recursive listing of repository files.
+
+If there were errors, I would:
+
+- Check the step logs,
+- Fix `./github/workflows/ci.yml`,
+- Commit and push again to re-run the workflow.
+
+
+## Task 2: Manual trigger and system information
+
+### 1. Add manual trigger to the workflow
+
+I updated the workflow to support manual runs via `workflow_dispatch`
+
+
+### 2. Gathering system information in the workflow
+
+Then I extended the job with an extra step to print runner system info:
+
+![screenshot](img/lab3-2.png)
+
+
+### 3. Documentation of outputs and observations
+
+After pushing this change or running it manually:
+
+- I opened the latest workflow run in the **Actions** tab.
+- In the **"Show system information"** step logs, I saw:
+  - Kernel version and architecture from `uname -a`,
+  - CPU model/cores from `lscpu` or `/proc/cpuinfo`,
+  - Total and used memory from `free -h`,
+  - Disk partitions and usage from `df -h`,
+  - Distribution name and version from `/etc/os-release`.
+
+This confirms:
+
+- The workflow can be triggered both automatically (on `push`/`pull_request`) and manually (`workflow_dispatch`).
+- I can inspect the properties of the GitHub-hosted runner and verify what environment my CI jobs run on.
+
+
