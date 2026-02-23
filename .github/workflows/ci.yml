@@ -4,6 +4,7 @@ on:
   push:
   pull_request:
     branches: [ master ]
+  workflow_dispatch:
 
 jobs:
   build:
@@ -17,3 +18,16 @@ jobs:
         run: |
           git --version
           ls -R
+
+      - name: Show system information
+        run: |
+          echo "=== uname -a ==="
+          uname -a
+          echo "=== CPU info ==="
+          lscpu || cat /proc/cpuinfo
+          echo "=== Memory info ==="
+          free -h || cat /proc/meminfo | head -n 20
+          echo "=== Disk usage ==="
+          df -h
+          echo "=== OS release ==="
+          cat /etc/os-release || true
