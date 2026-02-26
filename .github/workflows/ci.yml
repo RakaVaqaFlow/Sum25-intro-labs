@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+    branches: [ master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Show Git version and list files
+        run: |
+          git --version
+          ls -R
+
+      - name: Show system information
+        run: |
+          echo "=== uname -a ==="
+          uname -a
+          echo "=== CPU info ==="
+          lscpu || cat /proc/cpuinfo
+          echo "=== Memory info ==="
+          free -h || cat /proc/meminfo | head -n 20
+          echo "=== Disk usage ==="
+          df -h
+          echo "=== OS release ==="
+          cat /etc/os-release || true
